@@ -1,0 +1,601 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CBEE0FE95E301F6A0E23D72 /* CapsAwakeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */; };
+		1A16BEE29A87CE6A8D725632 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C2C3F77BF8F83A888B5E7 /* AppModel.swift */; };
+		27224F26D96CE37B5BC4813B /* CapsAwakeCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3FC0F050563E6B1375A0C309 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E009F73A2E6E3D90D46A9B1 /* MenuBarView.swift */; };
+		45082245640CE20D2CB719A3 /* CapsAwakeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */; };
+		5430F9FAE7F42E50EF838F98 /* RunningAppsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5CE4B47508D1BF570C4BA /* RunningAppsMonitor.swift */; };
+		730E00446D7C76826E9D5735 /* AwakeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0ADFEA7F2E77D8CCBE5D03 /* AwakeCoordinator.swift */; };
+		7B3A2209C01C768445385272 /* CapsLockMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D9C96CB110DC332E7AA7C /* CapsLockMonitor.swift */; };
+		82F6AD9F4DC8DD871F9F8683 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79721F00F7ED50864D5879B /* SettingsView.swift */; };
+		833C138FE712E8F618CACDFF /* CapsAwakeCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		83CE7042DDA7CB6D5BDE7976 /* TimerPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2715C62F7429D5B85ADCA1C /* TimerPlanner.swift */; };
+		951F9440A3C8A280AFE83D2E /* CapsAwakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC84B7B7C9F1D21F7F269DA /* CapsAwakeApp.swift */; };
+		A5E0313FD7421E51E64A8AC5 /* AwakeCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6208BBCC751E58CAC7FA80 /* AwakeCoordinatorTests.swift */; };
+		C2234613B4B2710CBC27BE8E /* PowerAssertionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FAF8EF2CD3EC677E8890B /* PowerAssertionController.swift */; };
+		D55FAA848C03E5257AD94C89 /* ConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C483D743C3D781155C29EDF /* ConfigurationStore.swift */; };
+		D56D4002FE372A73A8744350 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9B315FF5A9FB8D32C8C8D /* OnboardingView.swift */; };
+		DDB051893AD14BB6A89F06D1 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0DB78449457968B0AF8BC7 /* Models.swift */; };
+		E32C82471C8C956E0F0E1977 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B06F5D55DEAE89C47926CC /* NotificationController.swift */; };
+		EEDAD01FF1A4767FE503E061 /* LoginItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556C8A1E014677E1FBF776C8 /* LoginItemController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		684F6D40F7D9E0643291A25E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D70AAB0852942E5CDB3264B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CDA0D69A173A3C9D57410B8;
+			remoteInfo = CapsAwakeCore;
+		};
+		7AA95CAB3ABD6B70E4771FC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D70AAB0852942E5CDB3264B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CDA0D69A173A3C9D57410B8;
+			remoteInfo = CapsAwakeCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		372B75E9E43B8294844B9AD4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				833C138FE712E8F618CACDFF /* CapsAwakeCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3B984A8805945E61F1CC6ECF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				27224F26D96CE37B5BC4813B /* CapsAwakeCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		06B06F5D55DEAE89C47926CC /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		0E009F73A2E6E3D90D46A9B1 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		3DA5CE4B47508D1BF570C4BA /* RunningAppsMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningAppsMonitor.swift; sourceTree = "<group>"; };
+		473B8F4D9F765EEA122FC3D2 /* CapsAwakeCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapsAwakeCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		556C8A1E014677E1FBF776C8 /* LoginItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemController.swift; sourceTree = "<group>"; };
+		5C483D743C3D781155C29EDF /* ConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationStore.swift; sourceTree = "<group>"; };
+		7494837A894F970DBE0B3A17 /* CapsAwake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapsAwake.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A79721F00F7ED50864D5879B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AAD9B315FF5A9FB8D32C8C8D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AFC84B7B7C9F1D21F7F269DA /* CapsAwakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsAwakeApp.swift; sourceTree = "<group>"; };
+		B22D9C96CB110DC332E7AA7C /* CapsLockMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsLockMonitor.swift; sourceTree = "<group>"; };
+		B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CapsAwakeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B82C2C3F77BF8F83A888B5E7 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		DA5FAF8EF2CD3EC677E8890B /* PowerAssertionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAssertionController.swift; sourceTree = "<group>"; };
+		EA6208BBCC751E58CAC7FA80 /* AwakeCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeCoordinatorTests.swift; sourceTree = "<group>"; };
+		EE0ADFEA7F2E77D8CCBE5D03 /* AwakeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeCoordinator.swift; sourceTree = "<group>"; };
+		F2715C62F7429D5B85ADCA1C /* TimerPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPlanner.swift; sourceTree = "<group>"; };
+		FC0DB78449457968B0AF8BC7 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05927B5CB0B322073E07C85C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CBEE0FE95E301F6A0E23D72 /* CapsAwakeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B3C39A49AAC27D61C156916 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45082245640CE20D2CB719A3 /* CapsAwakeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		51F8B5D3FA327532333A0B9E /* CapsAwakeCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				EA6208BBCC751E58CAC7FA80 /* AwakeCoordinatorTests.swift */,
+			);
+			name = CapsAwakeCoreTests;
+			path = Tests/CapsAwakeCoreTests;
+			sourceTree = "<group>";
+		};
+		5A76FAC7D54724ECA27069EE /* CapsAwakeApp */ = {
+			isa = PBXGroup;
+			children = (
+				B82C2C3F77BF8F83A888B5E7 /* AppModel.swift */,
+				AFC84B7B7C9F1D21F7F269DA /* CapsAwakeApp.swift */,
+				B22D9C96CB110DC332E7AA7C /* CapsLockMonitor.swift */,
+				556C8A1E014677E1FBF776C8 /* LoginItemController.swift */,
+				0E009F73A2E6E3D90D46A9B1 /* MenuBarView.swift */,
+				06B06F5D55DEAE89C47926CC /* NotificationController.swift */,
+				AAD9B315FF5A9FB8D32C8C8D /* OnboardingView.swift */,
+				DA5FAF8EF2CD3EC677E8890B /* PowerAssertionController.swift */,
+				3DA5CE4B47508D1BF570C4BA /* RunningAppsMonitor.swift */,
+				A79721F00F7ED50864D5879B /* SettingsView.swift */,
+			);
+			name = CapsAwakeApp;
+			path = Sources/CapsAwakeApp;
+			sourceTree = "<group>";
+		};
+		9314C70DF59336C9EDA59928 = {
+			isa = PBXGroup;
+			children = (
+				5A76FAC7D54724ECA27069EE /* CapsAwakeApp */,
+				D7BD69E616E42022D86F7D8D /* CapsAwakeCore */,
+				51F8B5D3FA327532333A0B9E /* CapsAwakeCoreTests */,
+				DFC9BC5E0FEE2D3556E48CB3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D7BD69E616E42022D86F7D8D /* CapsAwakeCore */ = {
+			isa = PBXGroup;
+			children = (
+				EE0ADFEA7F2E77D8CCBE5D03 /* AwakeCoordinator.swift */,
+				5C483D743C3D781155C29EDF /* ConfigurationStore.swift */,
+				FC0DB78449457968B0AF8BC7 /* Models.swift */,
+				F2715C62F7429D5B85ADCA1C /* TimerPlanner.swift */,
+			);
+			name = CapsAwakeCore;
+			path = Sources/CapsAwakeCore;
+			sourceTree = "<group>";
+		};
+		DFC9BC5E0FEE2D3556E48CB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7494837A894F970DBE0B3A17 /* CapsAwake.app */,
+				B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */,
+				473B8F4D9F765EEA122FC3D2 /* CapsAwakeCoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07E0388525CFE51DBD58005B /* CapsAwakeCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D17C0A197FCAB7FE12DD54EC /* Build configuration list for PBXNativeTarget "CapsAwakeCoreTests" */;
+			buildPhases = (
+				036FA9DB6C3B1129B65EE2A5 /* Sources */,
+				05927B5CB0B322073E07C85C /* Frameworks */,
+				372B75E9E43B8294844B9AD4 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A0FD526D6871483D6022C23 /* PBXTargetDependency */,
+			);
+			name = CapsAwakeCoreTests;
+			packageProductDependencies = (
+			);
+			productName = CapsAwakeCoreTests;
+			productReference = 473B8F4D9F765EEA122FC3D2 /* CapsAwakeCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2CDA0D69A173A3C9D57410B8 /* CapsAwakeCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17872176E5BECDB7198EFF0F /* Build configuration list for PBXNativeTarget "CapsAwakeCore" */;
+			buildPhases = (
+				C19BE6B6471C4732ABDCB2A2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CapsAwakeCore;
+			packageProductDependencies = (
+			);
+			productName = CapsAwakeCore;
+			productReference = B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		88D0C0D96A274EE4481F6253 /* CapsAwake */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73DE1FF7A490D5CD0DE89FF6 /* Build configuration list for PBXNativeTarget "CapsAwake" */;
+			buildPhases = (
+				B767A1EC43DE1FE8394F3577 /* Sources */,
+				8B3C39A49AAC27D61C156916 /* Frameworks */,
+				3B984A8805945E61F1CC6ECF /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E82E7E82820FEA19AD71F753 /* PBXTargetDependency */,
+			);
+			name = CapsAwake;
+			packageProductDependencies = (
+			);
+			productName = CapsAwake;
+			productReference = 7494837A894F970DBE0B3A17 /* CapsAwake.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D70AAB0852942E5CDB3264B2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = D5ACAEFAFB2D9B16F0A02E1D /* Build configuration list for PBXProject "CapsAwake" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 9314C70DF59336C9EDA59928;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = DFC9BC5E0FEE2D3556E48CB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88D0C0D96A274EE4481F6253 /* CapsAwake */,
+				2CDA0D69A173A3C9D57410B8 /* CapsAwakeCore */,
+				07E0388525CFE51DBD58005B /* CapsAwakeCoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		036FA9DB6C3B1129B65EE2A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E0313FD7421E51E64A8AC5 /* AwakeCoordinatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B767A1EC43DE1FE8394F3577 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A16BEE29A87CE6A8D725632 /* AppModel.swift in Sources */,
+				951F9440A3C8A280AFE83D2E /* CapsAwakeApp.swift in Sources */,
+				7B3A2209C01C768445385272 /* CapsLockMonitor.swift in Sources */,
+				EEDAD01FF1A4767FE503E061 /* LoginItemController.swift in Sources */,
+				3FC0F050563E6B1375A0C309 /* MenuBarView.swift in Sources */,
+				E32C82471C8C956E0F0E1977 /* NotificationController.swift in Sources */,
+				D56D4002FE372A73A8744350 /* OnboardingView.swift in Sources */,
+				C2234613B4B2710CBC27BE8E /* PowerAssertionController.swift in Sources */,
+				5430F9FAE7F42E50EF838F98 /* RunningAppsMonitor.swift in Sources */,
+				82F6AD9F4DC8DD871F9F8683 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C19BE6B6471C4732ABDCB2A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				730E00446D7C76826E9D5735 /* AwakeCoordinator.swift in Sources */,
+				D55FAA848C03E5257AD94C89 /* ConfigurationStore.swift in Sources */,
+				DDB051893AD14BB6A89F06D1 /* Models.swift in Sources */,
+				83CE7042DDA7CB6D5BDE7976 /* TimerPlanner.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A0FD526D6871483D6022C23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2CDA0D69A173A3C9D57410B8 /* CapsAwakeCore */;
+			targetProxy = 7AA95CAB3ABD6B70E4771FC5 /* PBXContainerItemProxy */;
+		};
+		E82E7E82820FEA19AD71F753 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2CDA0D69A173A3C9D57410B8 /* CapsAwakeCore */;
+			targetProxy = 684F6D40F7D9E0643291A25E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6FEDCF77ACE1FD463FAE6471 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/CapsAwake.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaijindev.CapsAwake;
+				PRODUCT_NAME = CapsAwake;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		729789E9C3CC7B8857A771C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaijindev.CapsAwakeTests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B8362EA430F7A0B9DD34E9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaijindev.CapsAwakeCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		B932D37C9E369ED4E9B059B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/CapsAwake.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaijindev.CapsAwake;
+				PRODUCT_NAME = CapsAwake;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		C6986D99935AB13B9563719E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaijindev.CapsAwakeCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		D7924AE0FAF3C386E1003065 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		F25FF51DF4110951C140A55B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gaijindev.CapsAwakeTests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F45679B0F4E2E1B16167753D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17872176E5BECDB7198EFF0F /* Build configuration list for PBXNativeTarget "CapsAwakeCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8362EA430F7A0B9DD34E9A8 /* Debug */,
+				C6986D99935AB13B9563719E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		73DE1FF7A490D5CD0DE89FF6 /* Build configuration list for PBXNativeTarget "CapsAwake" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B932D37C9E369ED4E9B059B2 /* Debug */,
+				6FEDCF77ACE1FD463FAE6471 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D17C0A197FCAB7FE12DD54EC /* Build configuration list for PBXNativeTarget "CapsAwakeCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				729789E9C3CC7B8857A771C8 /* Debug */,
+				F25FF51DF4110951C140A55B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D5ACAEFAFB2D9B16F0A02E1D /* Build configuration list for PBXProject "CapsAwake" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F45679B0F4E2E1B16167753D /* Debug */,
+				D7924AE0FAF3C386E1003065 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D70AAB0852942E5CDB3264B2 /* Project object */;
+}

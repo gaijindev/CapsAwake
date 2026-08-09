@@ -2,11 +2,23 @@
 
 Keep your Mac awake when Caps Lock is on.
 
-CapsAwake is a native macOS menu-bar utility designed to make awake behavior immediate, visible, private, and predictable. Caps Lock is one trigger; timers, weekly schedules, app-based rules, and reusable presets are planned as independent triggers.
+CapsAwake is a native macOS menu-bar utility designed to make awake behavior immediate, visible, private, and predictable. Caps Lock is one trigger; timers, weekly schedules, app-based rules, and reusable presets are independent triggers.
 
 ## Project status
 
-CapsAwake is in the product-definition phase. The current source of truth is the [product specification](docs/capsawake-spec.md). Implementation has not started yet.
+The first implementation is in place: the pure policy core, menu-bar app shell, Caps Lock polling, public power assertions, timers, presets, schedules, app rules, local persistence, onboarding, and release automation are all included. The [product specification](docs/capsawake-spec.md) remains the source of truth for behavior.
+
+## Run locally
+
+```sh
+swift test
+./Scripts/check-format.sh
+xcodegen generate
+xcodebuild -project CapsAwake.xcodeproj -scheme CapsAwake \
+  -destination 'platform=macOS' test CODE_SIGNING_ALLOWED=NO
+```
+
+Open `CapsAwake.xcodeproj` in Xcode to run the menu-bar app. See [setup](docs/setup.md), [architecture](docs/architecture.md), and [release](docs/release.md) for details.
 
 ## Product principles
 
@@ -25,7 +37,7 @@ CapsAwake is in the product-definition phase. The current source of truth is the
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the planned development workflow. Before implementation begins, read the [product specification](docs/capsawake-spec.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow. Before changing behavior, read the [product specification](docs/capsawake-spec.md).
 
 ## License
 

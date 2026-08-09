@@ -1,6 +1,6 @@
 # Contributing to CapsAwake
 
-CapsAwake is currently in the product-definition phase. Read the [product specification](docs/capsawake-spec.md) before opening an implementation pull request.
+Read the [product specification](docs/capsawake-spec.md) before opening an implementation pull request. The architecture is documented in [docs/architecture.md](docs/architecture.md).
 
 ## Development expectations
 
@@ -10,7 +10,7 @@ CapsAwake is currently in the product-definition phase. Read the [product specif
 - Preserve the privacy boundary: no accounts, telemetry, analytics, or required network access.
 - Use the native macOS visual language and accessibility conventions.
 
-The project will document the exact Xcode, formatting, test, and release commands when the first implementation lands.
+Run `./Scripts/check-format.sh`, `swift test`, and the Xcode test command from [docs/setup.md](docs/setup.md) before opening a pull request. Changes that affect power policy should include a focused `AwakeCoordinator` test.
 
 ## Pull requests
 
