@@ -1,7 +1,7 @@
-# CapsKeep — Product Specification
+# CapsAwake — Product Specification
 
 Status: ready-for-agent  
-Working name: CapsKeep  
+Working name: CapsAwake  
 Target: macOS 14+, Universal binary (Apple silicon and supported Intel Macs)  
 Distribution: signed and notarized GitHub releases, followed by a Homebrew Cask
 
@@ -13,7 +13,7 @@ The utility must also support planned work without turning into a confusing auto
 
 ## Solution
 
-CapsKeep is a native SwiftUI menu-bar utility with no regular Dock presence. It passively reads the Mac’s logical Caps Lock state and combines that trigger with independent timers, weekly schedules, app rules, and manual sessions.
+CapsAwake is a native SwiftUI menu-bar utility with no regular Dock presence. It passively reads the Mac’s logical Caps Lock state and combines that trigger with independent timers, weekly schedules, app rules, and manual sessions.
 
 Each active trigger contributes a desired awake plan. System-sleep prevention is active when any trigger requests it. Display-sleep prevention is active when at least one active trigger requests it. The default policy prevents idle system sleep while allowing the display to sleep; each timer, schedule, app rule, or preset may override that display policy.
 
@@ -23,13 +23,13 @@ The menu-bar popover shows the current overall state, every active reason, quick
 
 1. As a Mac user, I want Caps Lock to keep my Mac awake, so that I can use a familiar physical state instead of hunting for a separate toggle.
 2. As a Mac user, I want normal sleep behavior to return when Caps Lock turns off, so that I do not leave my Mac awake accidentally.
-3. As a Mac user, I want CapsKeep to reflect the real logical Caps Lock state, so that the keyboard LED, typing behavior, menu-bar state, and awake behavior agree.
-4. As a Mac user, I want CapsKeep to work with built-in, USB, and Bluetooth keyboards, so that I do not need a special keyboard.
-5. As a privacy-conscious user, I want CapsKeep to avoid Accessibility and Input Monitoring permissions, so that a simple sleep utility does not receive unnecessary keyboard access.
+3. As a Mac user, I want CapsAwake to reflect the real logical Caps Lock state, so that the keyboard LED, typing behavior, menu-bar state, and awake behavior agree.
+4. As a Mac user, I want CapsAwake to work with built-in, USB, and Bluetooth keyboards, so that I do not need a special keyboard.
+5. As a privacy-conscious user, I want CapsAwake to avoid Accessibility and Input Monitoring permissions, so that a simple sleep utility does not receive unnecessary keyboard access.
 6. As a Mac user, I want to prevent idle system sleep while allowing the display to sleep by default, so that background work continues without unnecessarily keeping the screen lit.
 7. As a Mac user, I want a trigger to keep the display awake when necessary, so that presentations, meetings, and visual monitoring remain visible.
 8. As a Mac user, I want active display requirements to take precedence when triggers overlap, so that a presentation rule cannot be accidentally weakened by another trigger.
-9. As a Mac user, I want explicit Apple-menu sleep, lid closure, low-battery protection, and thermal protection to remain authoritative, so that CapsKeep cannot create an unsafe sleep lock.
+9. As a Mac user, I want explicit Apple-menu sleep, lid closure, low-battery protection, and thermal protection to remain authoritative, so that CapsAwake cannot create an unsafe sleep lock.
 10. As a Mac user, I want a timer for a fixed duration, so that I can keep the Mac awake for a bounded task.
 11. As a Mac user, I want a timer that ends at a chosen clock time, so that I can align awake behavior with a meeting or work deadline.
 12. As a Mac user, I want an “until turned off” session, so that I can run an open-ended task without inventing a duration.
@@ -60,10 +60,10 @@ The menu-bar popover shows the current overall state, every active reason, quick
 37. As a Mac user, I want the menu-bar popover to lead with current status and active reasons, so that the most important information is immediately visible.
 38. As a Mac user, I want Settings to contain General, Presets, Schedules, App Rules, and Advanced sections, so that configuration stays organized as features grow.
 39. As a first-time user, I want one concise onboarding explanation, so that I understand Caps Lock control, automation, display sleep, privacy, and Launch at Login.
-40. As a Mac user, I want Launch at Login to be opt-in, so that CapsKeep never changes my login items silently.
+40. As a Mac user, I want Launch at Login to be opt-in, so that CapsAwake never changes my login items silently.
 41. As a Mac user, I want routine session starts to remain quiet, so that the utility does not interrupt my work with notifications.
 42. As a Mac user, I want to optionally receive a notification when a timer ends, so that I can know when a bounded session has completed.
-43. As a Mac user, I want an optional notification when macOS cannot maintain a requested power assertion, so that CapsKeep never silently claims protection it does not have.
+43. As a Mac user, I want an optional notification when macOS cannot maintain a requested power assertion, so that CapsAwake never silently claims protection it does not have.
 44. As a Mac user, I want clear warnings when an assertion fails, so that I can retry or change the policy.
 45. As a Mac user, I want local settings to survive a relaunch, so that schedules, rules, and presets do not disappear.
 46. As a Mac user, I want unexpired timed sessions to recover after an unexpected relaunch, so that a crash does not silently abandon a long-running task.
@@ -85,7 +85,7 @@ The menu-bar popover shows the current overall state, every active reason, quick
 ## Implementation Decisions
 
 - **Platform and app shape:** Build a native SwiftUI macOS menu-bar app targeting macOS 14 or newer as a Universal binary. Use AppKit only for platform APIs that SwiftUI does not provide. The app has no regular Dock presence; Settings and About open only when requested.
-- **Working identity:** Use CapsKeep as the working product and package name. Validate repository, bundle identifier, and trademark availability before the first public release.
+- **Working identity:** Use CapsAwake as the working product and package name. Validate repository, bundle identifier, and trademark availability before the first public release.
 - **Primary seam:** The highest test seam is a pure `AwakeCoordinator` module. Its interface accepts current trigger facts, time/calendar context, persisted configuration, and user commands; it returns an `AwakePlan`, active reasons, warnings, and persistence changes. It does not import SwiftUI, AppKit, IOKit, or CoreGraphics.
 - **Deep module responsibility:** `AwakeCoordinator` owns trigger combination, timer deadlines, weekly schedule evaluation, preset resolution, display-policy precedence, manual sessions, “Allow Sleep Now,” restart recovery decisions, and failure-state interpretation.
 - **Platform adapters:** Keep narrow adapters behind explicit interfaces for Caps Lock state, running-app discovery, power assertions, clock/calendar, persistence, login items, notifications, and app lifecycle/wake refresh.
@@ -140,7 +140,7 @@ The menu-bar popover shows the current overall state, every active reason, quick
 ## Further Notes
 
 - The display-sleep decision is intentionally explicit: system-sleep prevention is the default, while display-sleep prevention is opt-in per trigger. This preserves the core “keep work running” behavior without promising that a locked screen immediately goes black.
-- The power assertion API is not a guarantee against every sleep cause. CapsKeep must represent the requested plan and the assertion result honestly, while macOS remains authoritative for explicit or safety-driven sleep.
+- The power assertion API is not a guarantee against every sleep cause. CapsAwake must represent the requested plan and the assertion result honestly, while macOS remains authoritative for explicit or safety-driven sleep.
 - The `AwakeCoordinator` is the single high-level seam. Platform adapters can change independently, and tests can use fakes without reproducing AppKit or IOKit state.
 - A future repository should publish this spec as a GitHub issue with the `ready-for-agent` label. This projectless workspace has no issue tracker configured, so this file is the current source of truth.
-- Before public naming, check CapsKeep repository availability, bundle-identifier ownership, trademark conflicts, Apple Developer signing identity, and Homebrew Cask naming.
+- Before public naming, check CapsAwake repository availability, bundle-identifier ownership, trademark conflicts, Apple Developer signing identity, and Homebrew Cask naming.

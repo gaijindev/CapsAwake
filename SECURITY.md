@@ -2,7 +2,7 @@
 
 ## Scope
 
-CapsKeep is a local macOS utility. It is designed to work without accounts, telemetry, analytics, or required network access.
+CapsAwake is a local macOS utility. It is designed to work without accounts, telemetry, analytics, or required network access.
 
 ## Reporting a vulnerability
 

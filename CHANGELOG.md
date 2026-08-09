@@ -1,3 +1,3 @@
 # Changelog
 
-CapsKeep has not had a public release yet.
+CapsAwake has not had a public release yet.

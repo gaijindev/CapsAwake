@@ -1,12 +1,12 @@
-# CapsKeep
+# CapsAwake
 
 Keep your Mac awake when Caps Lock is on.
 
-CapsKeep is a native macOS menu-bar utility designed to make awake behavior immediate, visible, private, and predictable. Caps Lock is one trigger; timers, weekly schedules, app-based rules, and reusable presets are planned as independent triggers.
+CapsAwake is a native macOS menu-bar utility designed to make awake behavior immediate, visible, private, and predictable. Caps Lock is one trigger; timers, weekly schedules, app-based rules, and reusable presets are planned as independent triggers.
 
 ## Project status
 
-CapsKeep is in the product-definition phase. The current source of truth is the [product specification](docs/capskeep-spec.md). Implementation has not started yet.
+CapsAwake is in the product-definition phase. The current source of truth is the [product specification](docs/capsawake-spec.md). Implementation has not started yet.
 
 ## Product principles
 
@@ -25,8 +25,8 @@ CapsKeep is in the product-definition phase. The current source of truth is the 
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the planned development workflow. Before implementation begins, read the [product specification](docs/capskeep-spec.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the planned development workflow. Before implementation begins, read the [product specification](docs/capsawake-spec.md).
 
 ## License
 
-CapsKeep is released under the MIT License. See [LICENSE](LICENSE).
+CapsAwake is released under the MIT License. See [LICENSE](LICENSE).

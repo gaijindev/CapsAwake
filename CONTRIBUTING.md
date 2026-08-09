@@ -1,6 +1,6 @@
-# Contributing to CapsKeep
+# Contributing to CapsAwake
 
-CapsKeep is currently in the product-definition phase. Read the [product specification](docs/capskeep-spec.md) before opening an implementation pull request.
+CapsAwake is currently in the product-definition phase. Read the [product specification](docs/capsawake-spec.md) before opening an implementation pull request.
 
 ## Development expectations
 
