@@ -1,4 +1,5 @@
 import Foundation
+import OSLog
 
 public enum ImportMode: String, Sendable {
     case merge
@@ -19,7 +20,7 @@ public struct ImportPreview: Equatable, Sendable {
     }
 }
 
-public enum ConfigurationStoreError: LocalizedError, Sendable {
+public enum ConfigurationStoreError: LocalizedError, Equatable, Sendable {
     case unsupportedSchema(Int)
     case invalidImport
     case unableToCreateDirectory
@@ -37,6 +38,7 @@ public enum ConfigurationStoreError: LocalizedError, Sendable {
 }
 
 public struct ConfigurationStore: Sendable {
+    private static let logger = Logger(subsystem: "com.gaijindev.CapsAwake", category: "persistence")
     public let fileURL: URL
 
     public init(fileURL: URL) {
@@ -69,6 +71,7 @@ public struct ConfigurationStore: Sendable {
         } catch let error as ConfigurationStoreError {
             throw error
         } catch {
+            Self.logger.error("Configuration decode failed; quarantining the file")
             try quarantineCorruptFile()
             return AwakeConfiguration()
         }

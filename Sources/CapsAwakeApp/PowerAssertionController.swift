@@ -1,9 +1,11 @@
 import CapsAwakeCore
 import Foundation
 import IOKit.pwr_mgt
+import OSLog
 
 @MainActor
 final class PowerAssertionController {
+    private let logger = Logger(subsystem: "com.gaijindev.CapsAwake", category: "power")
     private let nullAssertion: IOPMAssertionID = 0
     private var systemAssertion: IOPMAssertionID = 0
     private var displayAssertion: IOPMAssertionID = 0
@@ -67,6 +69,7 @@ final class PowerAssertionController {
             &assertionID
         )
         guard result == kIOReturnSuccess else {
+            logger.error("Power assertion failed: \(failureMessage, privacy: .public) code=\(result, privacy: .public)")
             lastError = "\(failureMessage) (code \(result))."
             return nil
         }

@@ -104,8 +104,12 @@ struct SettingsView: View {
                             Button("2 hours") { updatePresetDuration(preset, duration: .fixed(2 * 60 * 60)) }
                             Button("Until turned off") { updatePresetDuration(preset, duration: .untilTurnedOff) }
                             Button("End at 6:00 PM") {
-                                let end =
+                                let today =
                                     Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
+                                let end =
+                                    today > Date()
+                                    ? today
+                                    : Calendar.current.date(byAdding: .day, value: 1, to: today) ?? today
                                 updatePresetDuration(preset, duration: .until(end))
                             }
                         } label: {

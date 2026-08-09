@@ -2,9 +2,11 @@ import AppKit
 import CapsAwakeCore
 import Combine
 import Foundation
+import OSLog
 
 @MainActor
 final class AppModel: ObservableObject {
+    private let logger = Logger(subsystem: "com.gaijindev.CapsAwake", category: "state")
     @Published private(set) var plan = AwakePlan.inactive
     @Published private(set) var configuration: AwakeConfiguration
     @Published private(set) var manualSessions: [ManualSession] = []
@@ -101,6 +103,9 @@ final class AppModel: ObservableObject {
         }
         let previousError = lastPowerError
         plan = coordinator.evaluate(normalized, state: coordinatorState)
+        logger.debug(
+            "Plan updated: system=\(self.plan.preventSystemSleep, privacy: .public) display=\(self.plan.preventDisplaySleep, privacy: .public) reasons=\(self.plan.activeReasons.count, privacy: .public)"
+        )
         powerController.apply(plan)
         lastPowerError = powerController.lastError
         warning = lastPowerError ?? plan.warnings.first
@@ -354,6 +359,7 @@ final class AppModel: ObservableObject {
         do {
             try store?.save(configuration)
         } catch {
+            logger.error("Configuration save failed: \(error.localizedDescription, privacy: .public)")
             warning = "CapsAwake could not save settings."
         }
     }

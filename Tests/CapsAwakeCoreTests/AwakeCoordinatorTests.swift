@@ -255,4 +255,42 @@ struct AwakeCoordinatorTests {
         try store.save(configuration)
         #expect(try store.load() == configuration)
     }
+
+    @Test("corrupt configuration is quarantined and replaced with defaults")
+    func corruptConfigurationRecovery() throws {
+        let directory = FileManager.default.temporaryDirectory.appendingPathComponent(
+            "capsawake-corrupt-\(UUID().uuidString)", isDirectory: true)
+        let url = directory.appendingPathComponent("configuration.json")
+        let store = ConfigurationStore(fileURL: url)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        try Data("not-json".utf8).write(to: url)
+        #expect(try store.load() == AwakeConfiguration())
+        #expect(FileManager.default.fileExists(atPath: url.path) == false)
+        #expect(
+            (try? FileManager.default.contentsOfDirectory(atPath: directory.path))?.contains(where: {
+                $0.contains("corrupt-")
+            })
+                == true)
+    }
+
+    @Test("newer configuration schemas are rejected")
+    func newerConfigurationRejected() throws {
+        let store = ConfigurationStore(
+            fileURL: FileManager.default.temporaryDirectory.appendingPathComponent("unused.json"))
+        let data = Data("{\"schemaVersion\":99}".utf8)
+        #expect(throws: ConfigurationStoreError.unsupportedSchema(99)) {
+            try store.previewImport(data)
+        }
+    }
+
+    @Test("configuration merge preserves existing entries")
+    func configurationMerge() throws {
+        let store = ConfigurationStore(
+            fileURL: FileManager.default.temporaryDirectory.appendingPathComponent("unused.json"))
+        let existing = AwakeConfiguration(presets: [Preset(name: "Existing")])
+        let incoming = AwakeConfiguration(presets: [Preset(name: "Incoming")])
+        let merged = try store.importData(try store.exportData(incoming), mode: .merge, into: existing)
+        #expect(merged.presets.count == 2)
+    }
 }

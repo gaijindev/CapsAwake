@@ -15,6 +15,8 @@ if [[ -n "$identity" ]]; then
   codesign --deep --force --options runtime --timestamp --sign "$identity" "$app_path"
 fi
 
+codesign --verify --deep --strict "$app_path"
+
 ditto -c -k --keepParent "$app_path" "$output_dir/CapsAwake.zip"
 (cd "$output_dir" && shasum -a 256 CapsAwake.zip > CapsAwake.zip.sha256)
 
@@ -25,6 +27,8 @@ if [[ -n "${APPLE_ID:-}" && -n "${APPLE_TEAM_ID:-}" && -n "${APPLE_APP_PASSWORD:
     --password "$APPLE_APP_PASSWORD" \
     --wait
   xcrun stapler staple "$app_path"
+  xcrun stapler validate "$app_path"
+  spctl --assess --type execute --verbose "$app_path"
   ditto -c -k --keepParent "$app_path" "$output_dir/CapsAwake-notarized.zip"
   (cd "$output_dir" && shasum -a 256 CapsAwake-notarized.zip > CapsAwake-notarized.zip.sha256)
 fi
