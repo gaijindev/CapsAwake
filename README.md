@@ -18,7 +18,7 @@ xcodebuild -project CapsAwake.xcodeproj -scheme CapsAwake \
   -destination 'platform=macOS' test CODE_SIGNING_ALLOWED=NO
 ```
 
-Open `CapsAwake.xcodeproj` in Xcode to run the menu-bar app. See [setup](docs/setup.md), [architecture](docs/architecture.md), and [release](docs/release.md) for details.
+Open `CapsAwake.xcodeproj` in Xcode to run the menu-bar app. See [setup](docs/setup.md), [architecture](docs/architecture.md), [release](docs/release.md), and the [Impeccable audit](docs/impeccable-audit.md) for details.
 
 ## Product principles
 

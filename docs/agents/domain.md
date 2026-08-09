@@ -14,7 +14,7 @@ If any of these files do not exist, proceed silently. Do not flag their absence 
 
 CapsAwake is a single-context repository:
 
-```
+```text
 /
 ├── CONTEXT.md
 ├── docs/adr/
