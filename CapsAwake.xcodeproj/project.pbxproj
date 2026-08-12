@@ -19,6 +19,7 @@
 		833C138FE712E8F618CACDFF /* CapsAwakeCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B76E6FCF6583DDD353C7146F /* CapsAwakeCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83CE7042DDA7CB6D5BDE7976 /* TimerPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2715C62F7429D5B85ADCA1C /* TimerPlanner.swift */; };
 		951F9440A3C8A280AFE83D2E /* CapsAwakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC84B7B7C9F1D21F7F269DA /* CapsAwakeApp.swift */; };
+		A43952814516A0757A651831 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8E4B77F9C53479C1AACA1 /* Assets.xcassets */; };
 		A5E0313FD7421E51E64A8AC5 /* AwakeCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6208BBCC751E58CAC7FA80 /* AwakeCoordinatorTests.swift */; };
 		C2234613B4B2710CBC27BE8E /* PowerAssertionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FAF8EF2CD3EC677E8890B /* PowerAssertionController.swift */; };
 		D55FAA848C03E5257AD94C89 /* ConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C483D743C3D781155C29EDF /* ConfigurationStore.swift */; };
@@ -78,6 +79,7 @@
 		556C8A1E014677E1FBF776C8 /* LoginItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemController.swift; sourceTree = "<group>"; };
 		5C483D743C3D781155C29EDF /* ConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationStore.swift; sourceTree = "<group>"; };
 		7494837A894F970DBE0B3A17 /* CapsAwake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapsAwake.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FB8E4B77F9C53479C1AACA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A79721F00F7ED50864D5879B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AAD9B315FF5A9FB8D32C8C8D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AFC84B7B7C9F1D21F7F269DA /* CapsAwakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsAwakeApp.swift; sourceTree = "<group>"; };
@@ -144,8 +146,17 @@
 				5A76FAC7D54724ECA27069EE /* CapsAwakeApp */,
 				D7BD69E616E42022D86F7D8D /* CapsAwakeCore */,
 				51F8B5D3FA327532333A0B9E /* CapsAwakeCoreTests */,
+				C32E88729EB108EB1BA9CC07 /* Resources */,
 				DFC9BC5E0FEE2D3556E48CB3 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		C32E88729EB108EB1BA9CC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7FB8E4B77F9C53479C1AACA1 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		D7BD69E616E42022D86F7D8D /* CapsAwakeCore */ = {
@@ -215,6 +226,7 @@
 			buildConfigurationList = 73DE1FF7A490D5CD0DE89FF6 /* Build configuration list for PBXNativeTarget "CapsAwake" */;
 			buildPhases = (
 				B767A1EC43DE1FE8394F3577 /* Sources */,
+				756A8254D0A8D7A8FEC76874 /* Resources */,
 				8B3C39A49AAC27D61C156916 /* Frameworks */,
 				3B984A8805945E61F1CC6ECF /* Embed Frameworks */,
 			);
@@ -261,6 +273,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		756A8254D0A8D7A8FEC76874 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A43952814516A0757A651831 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		036FA9DB6C3B1129B65EE2A5 /* Sources */ = {
