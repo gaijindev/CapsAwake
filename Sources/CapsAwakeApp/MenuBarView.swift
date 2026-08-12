@@ -6,70 +6,128 @@ struct MenuBarView: View {
     @ObservedObject var model: AppModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 0) {
             header
             if let warning = model.warning {
-                VStack(alignment: .leading, spacing: 6) {
-                    Label(warning, systemImage: "exclamationmark.triangle")
-                        .foregroundStyle(.orange)
-                    Button("Retry") { model.retryPowerAssertion() }
-                        .buttonStyle(.borderless)
-                }
-                .accessibilityElement(children: .contain)
+                warningCard(warning)
+                    .padding(.top, 14)
             }
+            VStack(alignment: .leading, spacing: 18) {
+                reasons
+                actions
+                automationSummary
+            }
+            .padding(.top, 20)
             Divider()
-            reasons
-            automationSummary
-            actions
-            Divider()
+                .padding(.top, 18)
             footer
+                .padding(.top, 10)
         }
-        .padding(16)
-        .frame(width: 330)
+        .padding(.horizontal, 18)
+        .padding(.top, 16)
+        .padding(.bottom, 12)
+        .frame(width: 360)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .strokeBorder(.white.opacity(0.12), lineWidth: 0.5)
+        }
         .sheet(isPresented: Binding(get: { model.isOnboardingPresented }, set: { _ in })) {
             OnboardingView(model: model)
         }
     }
 
+    private func warningCard(_ warning: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(.orange)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 7) {
+                Text("Needs attention")
+                    .font(.system(size: 13, weight: .medium))
+                Text(warning)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Button("Retry") { model.retryPowerAssertion() }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(12)
+        .background(Color.orange.opacity(0.12), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .accessibilityElement(children: .contain)
+    }
+
     private var header: some View {
         HStack(spacing: 12) {
-            Image(systemName: model.menuBarSymbol)
-                .font(.title2)
-                .foregroundStyle(model.plan.preventSystemSleep ? .primary : .secondary)
-                .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 2) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(statusColor.opacity(0.18))
+                    .frame(width: 40, height: 40)
+                Image(systemName: model.menuBarSymbol)
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundStyle(statusColor)
+            }
+            .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 3) {
                 Text(model.statusTitle)
-                    .font(.headline)
+                    .font(.system(size: 18, weight: .medium))
                 Text(statusDetail)
-                    .font(.caption)
+                    .font(.system(size: 12))
                     .foregroundStyle(.secondary)
             }
-            Spacer()
+            Spacer(minLength: 10)
+            VStack(alignment: .trailing, spacing: 4) {
+                Circle()
+                    .fill(statusColor)
+                    .frame(width: 7, height: 7)
+                Text(statusLabel)
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundStyle(.secondary)
+            }
         }
         .accessibilityElement(children: .combine)
     }
 
     private var reasons: some View {
-        Group {
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Active reasons", symbol: "bolt.fill")
             if model.plan.activeReasons.isEmpty {
-                Label("Ready for a trigger", systemImage: "checkmark.circle")
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 10) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Ready for a trigger")
+                            .font(.system(size: 13, weight: .medium))
+                        Text("Caps Lock, timers, and automations are standing by.")
+                            .font(.system(size: 11))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.quaternary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
             } else {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Active reasons")
-                        .font(.subheadline.weight(.semibold))
+                VStack(alignment: .leading, spacing: 6) {
                     ForEach(model.plan.activeReasons) { reason in
-                        HStack {
+                        HStack(spacing: 10) {
                             Image(systemName: icon(for: reason.kind))
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(statusColor)
                                 .frame(width: 18)
                             Text(reason.title)
-                            Spacer()
+                                .font(.system(size: 13, weight: .medium))
+                            Spacer(minLength: 8)
                             if reason.mode.keepsDisplayAwake {
-                                Text("Display")
-                                    .font(.caption2)
+                                Label("Display", systemImage: "sun.max.fill")
+                                    .font(.system(size: 10, weight: .medium))
                                     .foregroundStyle(.secondary)
                             }
                         }
+                        .padding(.vertical, 3)
                         .accessibilityElement(children: .combine)
                     }
                 }
@@ -78,19 +136,42 @@ struct MenuBarView: View {
     }
 
     private var automationSummary: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("Automation")
-                .font(.subheadline.weight(.semibold))
-            Text(
-                "\(model.configuration.schedules.count) schedules · \(model.configuration.appRules.count) app rules · \(model.configuration.presets.count) presets"
-            )
-            .font(.caption)
-            .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Automation", symbol: "wand.and.stars")
+            HStack(spacing: 0) {
+                automationMetric("Schedules", count: model.configuration.schedules.count, symbol: "calendar")
+                Divider()
+                    .frame(height: 28)
+                automationMetric("App rules", count: model.configuration.appRules.count, symbol: "app.badge")
+                Divider()
+                    .frame(height: 28)
+                automationMetric("Presets", count: model.configuration.presets.count, symbol: "square.stack.3d.up")
+            }
+            .padding(.vertical, 9)
+            .frame(maxWidth: .infinity)
+            .background(.quaternary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
 
     private var actions: some View {
         VStack(alignment: .leading, spacing: 8) {
+            sectionHeader("Manual control", symbol: "hand.tap")
+            if model.automationPaused {
+                Button {
+                    model.resumeAutomation()
+                } label: {
+                    actionRow(title: "Resume automation", detail: "Turn triggers back on", symbol: "arrow.clockwise")
+                }
+                .buttonStyle(.plain)
+            } else if !model.plan.activeReasons.isEmpty {
+                Button {
+                    model.allowSleepNow()
+                } label: {
+                    actionRow(title: "Allow sleep now", detail: "Pause active triggers", symbol: "moon.zzz")
+                }
+                .buttonStyle(.plain)
+            }
+
             Menu {
                 ForEach(model.configuration.presets) { preset in
                     Button(preset.name) { model.start(preset) }
@@ -105,47 +186,93 @@ struct MenuBarView: View {
                 }
             } label: {
                 Label("Start a session", systemImage: "play.fill")
+                    .font(.system(size: 13, weight: .medium))
             }
-            .menuStyle(.borderlessButton)
-
-            if model.plan.activeReasons.isEmpty || model.automationPaused {
-                Button {
-                    model.resumeAutomation()
-                } label: {
-                    Label("Resume Automation", systemImage: "arrow.clockwise")
-                }
-                .buttonStyle(.borderless)
-                .disabled(!model.automationPaused)
-            } else {
-                Button {
-                    model.allowSleepNow()
-                } label: {
-                    Label("Allow Sleep Now", systemImage: "moon.zzz")
-                }
-                .buttonStyle(.borderless)
-            }
+            .menuStyle(.borderedButton)
+            .controlSize(.large)
 
             if !model.manualSessions.isEmpty || !model.timerSessions.isEmpty {
-                Button("Stop Manual Sessions") { model.stopAllSessions() }
-                    .buttonStyle(.borderless)
-                    .foregroundStyle(.secondary)
+                Button {
+                    model.stopAllSessions()
+                } label: {
+                    Label("Stop manual sessions", systemImage: "stop.fill")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 2)
             }
         }
     }
 
     private var footer: some View {
-        HStack {
+        HStack(spacing: 4) {
             SettingsLink {
-                Label("Settings", systemImage: "gearshape")
+                footerLabel("Settings", symbol: "gearshape")
             }
-            .buttonStyle(.borderless)
+            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
-            Button("About") { showAbout() }
-                .buttonStyle(.borderless)
+            Button {
+                showAbout()
+            } label: {
+                footerLabel("About", symbol: "info.circle")
+            }
+            .buttonStyle(.plain)
             Spacer()
-            Button("Quit") { model.quit() }
-                .buttonStyle(.borderless)
+            Button {
+                model.quit()
+            } label: {
+                footerLabel("Quit", symbol: "power")
+            }
+            .buttonStyle(.plain)
         }
+        .foregroundStyle(.secondary)
+    }
+
+    private func sectionHeader(_ title: String, symbol: String) -> some View {
+        Label(title, systemImage: symbol)
+            .font(.system(size: 12, weight: .medium))
+            .foregroundStyle(.secondary)
+    }
+
+    private func automationMetric(_ title: String, count: Int, symbol: String) -> some View {
+        VStack(spacing: 3) {
+            Image(systemName: symbol)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(.secondary)
+            Text("\(count)")
+                .font(.system(size: 15, weight: .medium))
+            Text(title)
+                .font(.system(size: 10))
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func actionRow(title: String, detail: String, symbol: String) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: symbol)
+                .font(.system(size: 13, weight: .medium))
+                .frame(width: 18)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 13, weight: .medium))
+                Text(detail)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.quaternary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+    }
+
+    private func footerLabel(_ title: String, symbol: String) -> some View {
+        Label(title, systemImage: symbol)
+            .font(.system(size: 11, weight: .medium))
     }
 
     private func icon(for kind: TriggerKind) -> String {
@@ -166,6 +293,16 @@ struct MenuBarView: View {
             return "Sleep prevention is active"
         }
         return "Nothing is keeping the Mac awake"
+    }
+
+    private var statusLabel: String {
+        if model.automationPaused { return "PAUSED" }
+        return model.plan.activeReasons.isEmpty ? "READY" : "ACTIVE"
+    }
+
+    private var statusColor: Color {
+        if model.automationPaused { return .orange }
+        return model.plan.activeReasons.isEmpty ? .secondary : .green
     }
 
     private func requestCustomDuration() {
