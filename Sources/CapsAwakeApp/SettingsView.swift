@@ -16,51 +16,141 @@ struct SettingsView: View {
                 .tabItem { Label("Schedules", systemImage: "calendar") }
             appRules
                 .tabItem { Label("App Rules", systemImage: "app.badge") }
-            advanced
-                .tabItem { Label("Advanced", systemImage: "slider.horizontal.3") }
         }
         .padding(20)
         .frame(width: 660, height: 430)
     }
 
     private var general: some View {
-        Form {
-            Section("Behavior") {
-                Text("Caps Lock is a passive trigger. When it is on, CapsAwake prevents idle system sleep.")
-                    .foregroundStyle(.secondary)
-                Toggle(
-                    "Launch at Login",
-                    isOn: Binding(
-                        get: { model.configuration.launchAtLogin },
-                        set: { model.setLaunchAtLogin($0) }
-                    ))
-                Toggle(
-                    "Notify when timers end",
-                    isOn: Binding(
-                        get: { model.configuration.timerEndNotifications },
-                        set: { model.setTimerEndNotifications($0) }
-                    ))
-                Toggle(
-                    "Notify when a power assertion fails",
-                    isOn: Binding(
-                        get: { model.configuration.assertionFailureNotifications },
-                        set: { model.setAssertionFailureNotifications($0) }
-                    ))
+        ScrollView {
+            VStack(alignment: .leading, spacing: 22) {
+                settingsSection(
+                    title: "Behavior",
+                    detail: "Caps Lock is a passive trigger. When it is on, CapsAwake prevents idle system sleep."
+                ) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        settingToggle(
+                            title: "Launch at Login",
+                            detail: "Start CapsAwake automatically when you sign in.",
+                            isOn: Binding(
+                                get: { model.configuration.launchAtLogin },
+                                set: { model.setLaunchAtLogin($0) }
+                            )
+                        )
+                        Divider()
+                        settingToggle(
+                            title: "Timer notifications",
+                            detail: "Let you know when a timed session ends.",
+                            isOn: Binding(
+                                get: { model.configuration.timerEndNotifications },
+                                set: { model.setTimerEndNotifications($0) }
+                            )
+                        )
+                        Divider()
+                        settingToggle(
+                            title: "Power assertion alerts",
+                            detail: "Tell you when macOS could not apply sleep prevention.",
+                            isOn: Binding(
+                                get: { model.configuration.assertionFailureNotifications },
+                                set: { model.setAssertionFailureNotifications($0) }
+                            )
+                        )
+                    }
+                }
+                settingsSection(title: "Privacy", detail: nil) {
+                    HStack(alignment: .top, spacing: 10) {
+                        Image(systemName: "lock.shield.fill")
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundStyle(.secondary)
+                            .frame(width: 22)
+                        Text("CapsAwake reads the system's logical modifier state and does not monitor keystrokes.")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.quaternary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                }
+                settingsSection(
+                    title: "Configuration",
+                    detail: "Back up or move your settings as versioned JSON."
+                ) {
+                    HStack(spacing: 10) {
+                        Button("Export JSON", systemImage: "square.and.arrow.up") { exportConfiguration() }
+                        Button("Import JSON", systemImage: "square.and.arrow.down") { importConfiguration() }
+                    }
+                    .padding(8)
+                }
             }
-            Section("Privacy") {
-                Label(
-                    "CapsAwake reads the system's logical modifier state and does not monitor keystrokes.",
-                    systemImage: "lock.shield"
-                )
-                .foregroundStyle(.secondary)
+            .frame(maxWidth: 560, alignment: .leading)
+            .padding(.horizontal, 28)
+            .padding(.vertical, 24)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    private func settingsSection<Content: View>(
+        title: String,
+        detail: String?,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.system(size: 15, weight: .medium))
+            if let detail {
+                Text(detail)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            content()
+                .padding(4)
+                .background(.quaternary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        }
+    }
+
+    private func settingToggle(title: String, detail: String, isOn: Binding<Bool>) -> some View {
+        Toggle(isOn: isOn) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 13, weight: .medium))
+                Text(detail)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
             }
         }
+        .toggleStyle(.switch)
+        .controlSize(.small)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 8)
+    }
+
+    private func emptyState(title: String, detail: String, symbol: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: symbol)
+                .font(.system(size: 17, weight: .medium))
+                .foregroundStyle(.secondary)
+                .frame(width: 38, height: 38)
+                .background(.quaternary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.system(size: 14, weight: .medium))
+                Text(detail)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.quaternary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
     private var presets: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Presets").font(.title2.weight(.semibold))
+                Text("Presets").font(.system(size: 20, weight: .medium))
                 Spacer()
                 Button("Add Preset", systemImage: "plus") { model.addPreset() }
             }
@@ -142,19 +232,22 @@ struct SettingsView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
     private var schedules: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Schedules").font(.title2.weight(.semibold))
+                Text("Schedules").font(.system(size: 20, weight: .medium))
                 Spacer()
                 Button("Add Schedule", systemImage: "plus") { model.addSchedule() }
             }
             if model.configuration.schedules.isEmpty {
-                ContentUnavailableView(
-                    "No schedules yet", systemImage: "calendar",
-                    description: Text("Create a weekly schedule when you want CapsAwake to work on a routine."))
+                emptyState(
+                    title: "No schedules yet",
+                    detail: "Create a weekly schedule when you want CapsAwake to work on a routine.",
+                    symbol: "calendar"
+                )
             } else {
                 List {
                     ForEach(model.configuration.schedules) { schedule in
@@ -256,20 +349,22 @@ struct SettingsView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
     private var appRules: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("App Rules").font(.title2.weight(.semibold))
+                Text("App Rules").font(.system(size: 20, weight: .medium))
                 Spacer()
                 Button("Add Rule", systemImage: "plus") { chooseAppForRule() }
             }
             if model.configuration.appRules.isEmpty {
-                ContentUnavailableView(
-                    "No app rules yet", systemImage: "app.badge",
-                    description: Text(
-                        "Choose an installed app and CapsAwake can stay awake while it runs or is frontmost."))
+                emptyState(
+                    title: "No app rules yet",
+                    detail: "Choose an installed app and CapsAwake can stay awake while it runs or is frontmost.",
+                    symbol: "app.badge"
+                )
             } else {
                 List {
                     ForEach(model.configuration.appRules) { rule in
@@ -365,31 +460,7 @@ struct SettingsView: View {
                 }
             }
         }
-    }
-
-    private var advanced: some View {
-        Form {
-            Section("Power policy") {
-                Text(
-                    "CapsAwake uses public macOS power assertions. They cover idle sleep only; explicit or safety-driven sleep remains authoritative."
-                )
-                .foregroundStyle(.secondary)
-            }
-            Section("Configuration") {
-                HStack {
-                    Button("Export JSON") { exportConfiguration() }
-                    Button("Import JSON") { importConfiguration() }
-                }
-                Text("Exports are versioned JSON. Imports are previewed before you choose merge or replace.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            if let warning = model.warning {
-                Section("Attention") {
-                    Label(warning, systemImage: "exclamationmark.triangle")
-                }
-            }
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
     private func durationLabel(_ duration: SessionDuration?) -> String {

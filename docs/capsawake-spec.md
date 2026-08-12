@@ -17,7 +17,7 @@ CapsAwake is a native SwiftUI menu-bar utility with no regular Dock presence. It
 
 Each active trigger contributes a desired awake plan. System-sleep prevention is active when any trigger requests it. Display-sleep prevention is active when at least one active trigger requests it. The default policy prevents idle system sleep while allowing the display to sleep; each timer, schedule, app rule, or preset may override that display policy.
 
-The menu-bar popover shows the current overall state, every active reason, quick timer and preset actions, automation summaries, and a safe “Allow Sleep Now” action. A native Settings window manages General, Presets, Schedules, App Rules, and Advanced sections. The first-run experience explains Caps Lock behavior, the display-sleep tradeoff, privacy, and optional Launch at Login.
+The menu-bar popover shows the current overall state, every active reason, quick timer and preset actions, automation summaries, and a safe “Allow Sleep Now” action. A native Settings window manages General, Presets, Schedules, and App Rules; configuration backup and restore live in General. The first-run experience explains Caps Lock behavior, the display-sleep tradeoff, privacy, and optional Launch at Login.
 
 ## User Stories
 
@@ -58,7 +58,7 @@ The menu-bar popover shows the current overall state, every active reason, quick
 35. As a Mac user, I want the menu-bar item to show an unmistakable active state, so that I can confirm the Mac’s current policy at a glance.
 36. As a Mac user, I want the menu-bar icon to work in light and dark menu bars, so that the app feels native in either appearance.
 37. As a Mac user, I want the menu-bar popover to lead with current status and active reasons, so that the most important information is immediately visible.
-38. As a Mac user, I want Settings to contain General, Presets, Schedules, App Rules, and Advanced sections, so that configuration stays organized as features grow.
+38. As a Mac user, I want Settings to contain General, Presets, Schedules, and App Rules, so that configuration stays organized without an expert-only section.
 39. As a first-time user, I want one concise onboarding explanation, so that I understand Caps Lock control, automation, display sleep, privacy, and Launch at Login.
 40. As a Mac user, I want Launch at Login to be opt-in, so that CapsAwake never changes my login items silently.
 41. As a Mac user, I want routine session starts to remain quiet, so that the utility does not interrupt my work with notifications.
@@ -100,7 +100,7 @@ The menu-bar popover shows the current overall state, every active reason, quick
 - **Manual controls:** The menu bar exposes quick presets, Custom, Until Turned Off, Allow Sleep Now, and Resume Automation. “Allow Sleep Now” releases assertions and suppresses conditions active at that moment until those conditions reset; it does not delete configuration.
 - **Relaunch behavior:** Persist timed deadlines and re-evaluate Caps Lock, schedules, and app rules at launch. Restore unexpired timed sessions after unexpected relaunch. Explicit Quit cancels manual and timed sessions.
 - **Persistence:** Store versioned `Codable` configuration locally in Application Support. Writes are atomic. Migrations are explicit. Corrupt data is preserved for diagnosis when possible and replaced only through a safe recovery path. JSON export/import is versioned, validated, previewable, and supports explicit merge or replace behavior.
-- **UI hierarchy:** The popover presents overall status, active reasons, Allow Sleep Now/Resume Automation, quick timers and presets, automation summaries, Settings, About, and Quit in that order. Settings contains General, Presets, Schedules, App Rules, and Advanced.
+- **UI hierarchy:** The popover presents overall status, active reasons, Allow Sleep Now/Resume Automation, quick timers and presets, automation summaries, Settings, About, and Quit in that order. Settings contains General, Presets, Schedules, and App Rules, with configuration backup and restore in General.
 - **Visual language:** Use system typography, SF Symbols, template menu-bar icons, standard materials, light/dark mode, restrained transitions, and no decorative gradients, glows, custom chrome, or color-only state indicators. Support VoiceOver, keyboard navigation, focus, Dynamic Type, high contrast, and reduced motion.
 - **Onboarding and defaults:** On first launch, explain behavior and privacy in one compact screen. Caps Lock is enabled as a trigger; system-sleep prevention is enabled; display sleep remains allowed; no schedules or app rules are enabled; Launch at Login and notifications are opt-in.
 - **Notifications:** Do not notify for routine starts. Timer-end and assertion-failure notifications are optional and request permission only when enabled.

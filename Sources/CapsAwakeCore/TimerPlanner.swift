@@ -6,8 +6,10 @@ public enum TimerPlanner {
         let expiresAt: Date?
         switch duration {
         case .fixed(let seconds):
+            guard seconds > 0 else { return nil }
             expiresAt = now.addingTimeInterval(seconds)
         case .until(let date):
+            guard date > now else { return nil }
             expiresAt = date
         case .untilTurnedOff:
             expiresAt = nil

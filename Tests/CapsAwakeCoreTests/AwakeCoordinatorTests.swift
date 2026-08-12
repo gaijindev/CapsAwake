@@ -55,6 +55,19 @@ struct AwakeCoordinatorTests {
         #expect(coordinator.reconcile(suppressed, with: facts).suppressedTriggerIDs.isEmpty)
     }
 
+    @Test("suppression is released after an expired timer resets")
+    func timerSuppressionReconciliation() {
+        let timer = TimerSession(title: "Bounded", mode: .systemOnly, expiresAt: now.addingTimeInterval(60))
+        let activeFacts = TriggerFacts(capsLockOn: false, now: now, timerSessions: [timer])
+        let result = coordinator.reduce(.allowSleepNow, facts: activeFacts)
+        #expect(result.state.suppressedTriggerIDs.count == 1)
+
+        let expiredFacts = TriggerFacts(capsLockOn: false, now: now.addingTimeInterval(61), timerSessions: [timer])
+        let reconciled = coordinator.reconcile(result.state, with: expiredFacts)
+        #expect(reconciled.suppressedTriggerIDs.isEmpty)
+        #expect(coordinator.evaluate(expiredFacts, state: reconciled) == .inactive)
+    }
+
     @Test("reset suppression command releases one trigger")
     func resetSuppressionCommand() {
         let facts = TriggerFacts(capsLockOn: true, now: now)
@@ -85,6 +98,17 @@ struct AwakeCoordinatorTests {
         let tuesdayEarly = calendar.date(from: DateComponents(year: 2026, month: 8, day: 4, hour: 0, minute: 30))!
         #expect(schedule.isActive(at: mondayLate, calendar: calendar))
         #expect(schedule.isActive(at: tuesdayEarly, calendar: calendar))
+    }
+
+    @Test("schedule boundaries are start-inclusive and end-exclusive")
+    func scheduleBoundaries() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let schedule = WeeklySchedule(name: "Focus", weekdays: [.monday], startMinutes: 9 * 60, endMinutes: 10 * 60)
+        let start = calendar.date(from: DateComponents(year: 2026, month: 8, day: 3, hour: 9))!
+        let end = calendar.date(from: DateComponents(year: 2026, month: 8, day: 3, hour: 10))!
+        #expect(schedule.isActive(at: start, calendar: calendar))
+        #expect(!schedule.isActive(at: end, calendar: calendar))
     }
 
     @Test("skip next marks only the selected schedule occurrence")
@@ -226,6 +250,14 @@ struct AwakeCoordinatorTests {
         #expect(TimerPlanner.session(from: openEnded, now: now)?.expiresAt == nil)
     }
 
+    @Test("timer planner rejects non-positive deadlines")
+    func timerPlannerRejectsInvalidDeadlines() {
+        let zeroDuration = Preset(name: "Zero", duration: .fixed(0))
+        let pastDeadline = Preset(name: "Past", duration: .until(now.addingTimeInterval(-1)))
+        #expect(TimerPlanner.session(from: zeroDuration, now: now) == nil)
+        #expect(TimerPlanner.session(from: pastDeadline, now: now) == nil)
+    }
+
     @Test("preset sessions use absolute wall-clock deadlines")
     func presetSessionDeadline() {
         let preset = Preset(name: "Focused", mode: .systemOnly, duration: .fixed(600))
@@ -282,6 +314,17 @@ struct AwakeCoordinatorTests {
         #expect(throws: ConfigurationStoreError.unsupportedSchema(99)) {
             try store.previewImport(data)
         }
+    }
+
+    @Test("invalid imports leave the current configuration unchanged")
+    func invalidImportDoesNotMutateCurrentConfiguration() throws {
+        let store = ConfigurationStore(
+            fileURL: FileManager.default.temporaryDirectory.appendingPathComponent("unused.json"))
+        let current = AwakeConfiguration(presets: [Preset(name: "Keep me")])
+        #expect(throws: ConfigurationStoreError.invalidImport) {
+            try store.importData(Data("not-json".utf8), mode: .replace, into: current)
+        }
+        #expect(current.presets.map(\.name) == ["Keep me"])
     }
 
     @Test("configuration merge preserves existing entries")
